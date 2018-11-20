@@ -1,199 +1,187 @@
-<h1 align="center">Project 4 Prompt</h1>
+<h1 align="center">Disney Dates</h1>
+<h2 align="center">Project 4</h2>
 
-<p align="center"><strong>Read this entire document before writing a line of code.</strong></p>
+# Project Overview
 
-#### Table of Contents
 
-- [Science Fair](#science-fair): Science Fair
-- [Overview](#overview): What is this project?
-- [Technical Requirements](#technical-requirements): What technologies will you be using?
-- [Planning & Deliverables](#planning--deliverables): What will we be presenting?
-- [Project Timeline](#project-timeline)
-- [About Plagiarism](#about-plagiarism): How do we keep ourselves honest?
+## Project Links
+[Deployed Project](https://herokudeployfinsta.herokuapp.com/)
 
+## Project Description
 
+Use this section to describe your final project and perhaps any links to relevant sites that help convey the concept and\or functionality.
 
----
+Four my fourth project, I have decided to create Disney Dates- a dating app for people with a mutual love of all things Disney. The app will be created with React Native, and supported by an external Express database. Users will create an account or sign in through Facebook. Once the user is logged in, they can edit their profile settings including the gender of their love interest, the location range, and the age range. The user will also have to edit their profile to include photos, and answer questions regarding their favorite Disney things. After this is determined, the user can swipe through profiles of potential matches. If the user swipes right, and the other user reciprocates, they will match! Once a user has matches they are able to message eachother through chat in hopes of finding their one true love!
 
-## Science Fair
+## Project Schedule
 
-Project 4 science fair will start at 1:30pm on Monday, Dec 3rd. 
+This schedule will be used to keep track of your progress throughout the week and align with our expectations.  
 
-## Overview
+You are **responsible** for scheduling time with your squad to seek approval for each deliverable by the end of the corresponding day, excluding `Saturday` and `Sunday`.
 
-**You’ve come a long way, and it's time to show it.** This will be your most advanced project to date, and if you put creativity into it, it'll hopefully be the thing you want to show off most prominently in your portfolio.
+|  Day | Due Date | Deliverable | Status
+|:---:|---|---|:---:|
+|Day 1| Nov 19 | Prject Worksheet, Wireframes, Priority Matrix, Determine Functional Components | Incomplete
+|Day 2| Nov 20 | Project Approvoal, Research on React Native, Database, Functional Components, FaceBook Login, CSS Animation, Spin up React Native App | Incomplete
+|Day 3| Nov 21 | Create database including: routes, controller and model. Create folders/components in React Native App | Incomplete
+|Day 4| Nov 23 | Create loading page, work on FacebookSDK login, create swipe page, edit profile, and mouseages. Link database to react native app | Incomplete
+|Day 5| Nov 26 | add functioning logic to swipe page and edit profile page | Incomplete
+|Day 6| Nov 27 | add functioning logic to mousages page | Incomplete
+|Day 7| Nov 29 | Work on PMVP | Incomplete
+|Day 8| Nov 30 | Complete styling | Incomplete
+|Day 9| Dec 3 | Present and Science Fair | Incomplete
 
-**You get to call the shots and invent your own idea**, choosing a framework & tools that are appropriate for what you want to build. Pull from everything you've learned so far, and **tackle something that'll push you a little outside of your comfort zone.**
+## Wireframes
 
-Make sure you review your project proposal with your instructor so you can make sure it's **something you can accomplish in the limited time we have**, and make sure it's **something that'll be impressive visually**. Sometimes people do judge a book by its cover – or an app by its design.
+Upload images of wireframe to cloudinary and add the link here with a description of the specific wireframe.
 
----
+[WireFrame](https://res.cloudinary.com/drsaojfyp/image/upload/v1542729024/Wireframe.pdf)
 
-## Technical Requirements
+WireFrame includes:
 
+- [Load Page](https://res.cloudinary.com/drsaojfyp/image/upload/v1542724982/Screen_Shot_2018-11-20_at_9.32.03_AM.png)
+- [LogIn Page](https://res.cloudinary.com/drsaojfyp/image/upload/v1542725042/Screen_Shot_2018-11-20_at_9.32.13_AM.png)
+- [Swipe Page](https://res.cloudinary.com/drsaojfyp/image/upload/v1542725082/Screen_Shot_2018-11-20_at_9.32.34_AM.png)
+- Enhanced Swipe Page
+- [Mouseages](https://res.cloudinary.com/drsaojfyp/image/upload/v1542725159/Screen_Shot_2018-11-20_at_9.45.47_AM.png)
+- [Individual Chat](https://res.cloudinary.com/drsaojfyp/image/upload/v1542725200/Screen_Shot_2018-11-20_at_9.34.07_AM.png)
+- [Individual Chat Page Edit Button Selected](https://res.cloudinary.com/drsaojfyp/image/upload/v1542725200/Screen_Shot_2018-11-20_at_9.34.07_AM.png)
+- [Edit Profile Page](https://res.cloudinary.com/drsaojfyp/image/upload/v1542727272/Screen_Shot_2018-11-20_at_9.34.38_AM.png)
+- [Profile Settings Page](https://res.cloudinary.com/drsaojfyp/image/upload/v1542729053/Screen_Shot_2018-11-20_at_10.49.32_AM.png)
 
-**Your app must:**
 
-* **Build a full-stack application** by making your own backend and your own front-end
-* **Have an interactive front-end**. This will more than likely be React.
-* **Be a complete product**. Hint: this probably includes CRUD functionality.
-* **Implement thoughtful user stories** that are significant enough to help you know which features to build and which to scrap
-* **Have a visually impressive design** to kick your portfolio up a notch and have something to wow future clients & employers
-* **Be deployed online** so it's publicly accessible
+## Priority Matrix
 
----
+Include a full list of features that have been prioritized based on the `Time and Importance` Matix.  
 
-## Planning & Deliverables
+[Priority Matrix](https://res.cloudinary.com/drsaojfyp/image/upload/v1542744440/Disney_Dates-_Priority_Matrix.pdf)
 
-###### What will we be turning in?
 
-### Project Planning Deliverables
+### MVP/PostMVP - 5min
 
-#### You must review the following with your instructional team BEFORE you start to code.
+The functionality will then be divided into two separate lists: MPV and PostMVP.  Carefully decided what is placed into your MVP as the client will expect this functionality to be implemented upon project completion.  
 
-Your proposals must include:
+#### MVP 
 
-* **Scope:** What are you planning to build? What is the name of your application. What technologies do you plan to use? What do you reasonably think you can implement in the allotted time period? What are your reach goals?
-* **User Stories:** Who is your user? What features will your app have? Set up your project schedule in [GitHub Project](https://git.generalassemb.ly/wdi-nyc-arcadia/project-4/projects). Write out your user stories in the README. Establish a timeline for completionn.
-* **Wireframes:** What does MVP look like? Sketch out what your core pages will look like and how they will work. Consider making a *paper prototype* to demonstrate and/or test key user interactions.
-* **Data Models:** Draw out the models and any associations for your project in an entity relationship diagram (ERDs).
-* **Milestones:** Outline the milestones/sprints in GitHub Project.
+- Load page
+- Login with FacebookSDK
+- Create user account with email address
+- Edit user account to include photos and answer questions/bio
+- Edit user settings to include choosing own identity/interested identity
+- Log out of user account
+- Swipe page/swipe function of liked/not liked
+- Making two accounts match if both swipe right 
+- Display matches on mouseages page
+- Create display for all components (clicking buttons to navigate to each page)
 
-### Completed Project Deliverables
 
-- A **working API**, hosted somewhere on the internet
-- A handmade front-end **that consumes your own API**, hosted somewhere on the internet
-- A **link to your hosted working app** in the URL section of your Github repo
-- A link to your **repository hosted on Github Enterprise**, with a link to your hosted project, and frequent commits dating back to the _very beginning_ of the project
-- **A `README.md` file** with:
-    - Explanations of the **technologies** used
-    - A couple of paragraphs about the **general approach you took**
-    - **Installation instructions** for any dependencies
-    - Link to your ERDs - Diagrams of your models and their relationships.
-    - Link to your **user stories** – who are your users, what do they want, and why?
-    - Link to your **wireframes** – sketches of views and interfaces in your application
-    - Descriptions of any **unsolved problems** or **hurdles** you had to overcome
 
----
+#### PostMVP 
 
-## Project Timeline 
+- Create chat between matches
+- Edit the range of distance of people to swipe 
+- Edit the range of age of people to swipe 
+- Connect Instagram account to profile 
 
-###### When is it due?
 
-| Date            | Action                                                                                                          |
-|:-----------------:|-----------------------------------------------------------------------------------------------------------------|
-| **11/15**    | Start thinking of ideas for your final project               |
-| **11/20**   | **PROJECT PROPOSALS!** Please have wireframes, user stories, ERDs, additional requirements you will tackle, and a project timeline for us to review.           |                                                   |
-| **11/21-12/3**     | Project worktime! You'll have time to work on your project for the last week of class.                                                                                              |
-| **12/3**          | Unit Four Science Fair _(Concourse)_               |
-| **12/5**         | 🎓🎓Graduation🎓🎓                 |
----
+## Architectural Design
 
-### What if I don't know what I want to build?
+Define the the React components and the architectural design of your app.
 
-- Capstone Project
+[Architectural Design 1](https://res.cloudinary.com/drsaojfyp/image/upload/v1542734483/Project_4-_Disney_Dates.pdf)
 
----
 
-## Asking for Help
+### Functional Components
 
-**You are going to encounter a ton of unexpected errors and problems.**
+Based on the initial logic defined in the previous sections try and breakdown the logic further into stateless/stateful components. 
 
-Expect to come up against a lot of what can **seem** like roadblocks. Push forward and through; these are amazing learning opportunities. A lot of students treat errors during projects as just getting in the way of "finishing". The point of this project is **not** to finish everything; the point is to integrate your knowledge and deepen your understanding of how to put apps together.
-
-Errors provide the most valuable source of information about gaps in our understanding. Seeing an error as "it's not working" and randomly changing code until "it works" will make everything worse. Spending time thoughtfully debugging issues is a fantastic investment that will lead to greater mastery and understanding.
-
-**Pro-Tip** - 'Failure is a temporary state.'
-
----
-
-## Suggested Ways to Start
-
-* **Don’t get too caught up in too many awesome features** – simple is always better. Build something impressive that does one thing well.
-* **Design first.** Planning with user stories & wireframes before writing code means you won't get distracted changing your mind – you'll know what to build, and you can spend your time wisely by just building it.
-* **Don’t hesitate to write throwaway code** to solve short term problems.
-* **Read the documentation for whatever technologies / frameworks / API’s you use**.
-* **Write your code DRY** and **build your APIs RESTful**.
-* **Commit early, commit often.** Don’t be afraid to break something because you can always go back in time to a previous version.
-* **Keep user stories small and well-defined**, and remember – user stories focus on what a user needs, not what development tasks need accomplishing.
-* **Write code another developer wouldn't have to ask you about**. Do your naming conventions make sense? Would another developer be able to look at your app and understand what everything is?
-* **Make it all well-formatted.** Are you indenting, consistently? Can we find the start and end of every div, curly brace, etc?
-* **Comment your code.** Will someone understand what is going on in each block or function? Even if it's obvious, explaining the what & why means someone else can pick it up and get it.
-* **Write pseudocode before you write actual code.** Thinking through the logic of something helps.
-
-___
-
-## Process
-
-**Do not** immediately jump into coding.  For your thesis project you want to carefully plan your approach. You **must** use the provided GitHub Project [template](https://git.generalassemb.ly/layne/project-2/projects).
-
-- Database: Draw out the tables and columns you plan to use in your database (ERDs - Entity Relationship Diagram)
-- Wireframes: Detail the flow of your app through simple wireframes
-  * You can choose whether you want to whiteboard the wireframes, use some program or just sketch it out with pencil and paper.
-- Routes: Design the HTTP route architecture of your application using  [RESTful conventions](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_Web_services)
-
-- Set up a separate GitHub repository __(NOT this one)__ and **project board** (use the template provided) for your project
-- Schema & Seeds: When you are confident with your ERD, define its tables in SQL and put into a schema file. For easier testing, write a seed file as well to insert sample data to your database.
-- Models: Write a model with methods that perform CRUD on the database.
-
----
-
-## Random Fun Things You Could Check Out (Definitely not required):
-* Mapbox - Use React to build a phone app!
-* Websockets - Use JS to build a native application
-* Raspberry Pi - Use JS to build a robot/IoT project
-* D3 - Build beautiful graphs and visual experiences for data.
-
----
-
-## Project Evaluation
-
-* __Project Workflow__: Did you complete the user stories, wireframes, and/or task tracking as specified above?
-
-* __Technical Requirements__: Did you deliver a project that met all the technical requirements? Given what the class has covered so far, did you build something that was reasonably complex?
-
-* __Creativity__: Did you added a personal spin or creative element into your project submission? Did you deliver something of value to the end user (not just a login button and an index page)?
-
-* __Code Quality__: Did you follow code style guidance and best practices covered in class, such as spacing, modularity, and semantic naming? Did you comment your code as your instructors have in class?
-
----
-
-## Submission
-
-###### How do we turn in the project?
-
-* Fork this repo. Create a Pull request on this repository where the title includes your name and the name of your application.
-
-In the body of the pull request include:
-
-1. Link to your deployed app
-2. Link to the project GitHub repo 
-3. Wins, struggles, comments, etc...
-
----
-
-## About Plagiarism
-
-Plagiarism is a serious offense and grounds for expulsion. Our entire policy can be found [in the wiki](https://github.com/ga-students/wdi-nyc-purple-rain-students/wiki/General-Assembly-Plagiarism-Policy).
-
-You are encouraged to ask others, including students, instructors, and stackoverflow, for help. However, it is NOT ACCEPTABLE TO COPY another person's code and submit it as your own. More importantly, it is detrimental to your learning and growth.
-
-All of the following are considered plagiarism or cheating:
-
-* Turning in work that is not your own.
-* Turning in someone else's work as your own.
-* Hiring, or paying someone to do your work for you.
-* Copying words or code without giving credit.
-* Building or copying someone else’s idea without their knowledge or giving credit.
-* Giving incorrect information about a source.
-* Changing words, variable names, etc. but copying the code or files of a source without giving credit.
-* Copying so many ideas or code blocks from a source that it makes up the majority of your work, whether you give credit or not.
-* Failing to put a quotation in quotation marks.
-
-In an effort to not plagiarize, credit for this content goes to:
-
-* [Plagiarism.org](http://plagiarism.org/), specifically the “plagiarism 101” section.  Content was adapted for code.  For more information, please see:
-  * [What is Plagiarism](http://www.plagiarism.org/plagiarism-101/what-is-plagiarism)
-  * [Types of Plagiarism](http://www.plagiarism.org/plagiarism-101/types-of-plagiarism)
-* [How do I safely write code in my own 'words' and not plagiarize?](http://programmers.stackexchange.com/questions/80167/how-do-i-safely-write-code-in-my-own-words-and-not-plagiarize)
-* [Avoiding Plagiarism:  Writing Computer Code](http://www.upenn.edu/academicintegrity/ai_computercode.html)
+| Component | Description | 
+| --- | --- |  
+| Load Page | Display when app is opened for a set amount of time| 
+| LogIn Page | will allow user to login with facebook or email address| 
+| Facebook SDK login | allows user to login using their Facebook account | 
+| Email login | allows user to log into exsisting account with email address- renders create user account link |
+| Create New User with Email | allows user to create an account with email address | 
+| Navigation/Switcher | routes to the edit profile, swipe page, and mouseages components | 
+| Swipe Page | rendered after login- includes the user profile to swipe through and links to edit profile or mouseages | 
+| User Profile for Swipe | display of user profile to potential matches- if clicked renders enlarged profile | 
+| Enlarged Profile | shows full screen view of potential match user profile |
+| Edit Profile | User can edit their profile including their pictures and bio information- render settings page | 
+| Settings Page | Allows user to update identity, interests identy- renders age range, distance range, and logout button components | 
+| Age Range Component | Allows user to adjust the age range of their potential matches |
+| Distance Range Component | Utilizing React Native's location feature, users can adjust the range of distance their potential match is from their location |
+| Log Out Button | Allows users to log out of their account and redirect to login page |
+| Mouseages Page | Displays new matches (become part of their world) as well as list of ongoing chats, and a search bar to search through matches by name |
+| Become Part of Their World| List of new matches- when clicked opens chat room |
+| List of Mouseages | List of ongoing chats- when clicked opens chat room |
+| Search Through Matches | Allows user to search through matches by typing a name |
+| Chat Room | Live chat room between user and match- renders an edit/settings button |
+| Edit Button | Allows users to view the profile of their match, unmatch the user, or go back to chat room |
+
+
+##Time Frames
+
+Time frames are also key in the development cycle.  You have limited time to code all phases of the game.  Your estimates can then be used to evalute game possibilities based on time needed and the actual time you have before game must be submitted. It's always best to pad the time by a few hours so that you account for the unknown so add and additional hour or two to each component to play it safe.
+
+| Component | Priority | Estimated Time | Time Invetsted | Actual Time |
+| --- | :---: |  :---: | :---: | :---: |
+| App | H | 3hrs | 2hrs | 2hrs |
+| Switcher | H | 3hrs| 1hrs | 1hrs |
+| Create User Account | H | 7hrs | 3hrs | 3hrs |
+| Login Page/ Authentication | H | 5hrs | 6hrs | 6hrs |
+| Database | H | 5hrs| 3hrs | 5hrs |
+| Linking Components to DB | H | 10hrs| 6hrs | 8hrs |
+| Newsfeed | H | 4hrs | 5hrs | 5hrs |
+| Navigation | H | 2hrs | 1hrs | 1hrs |
+| Footer | H | 2hrs | 8hrs | 6hrs |
+| Add Photo Camera | H | 3hrs | 2hrs | 5hrs |
+| Add Photo URL | H | 3hrs | 2hrs | 3hrs |
+| Profile Page | L | 5hrs | 2.5hrs | 6hrs |
+| Messages | L | 10hrs | 0hrs | 0hrs |
+| Comments | L | 6hrs | 0hrs | 4hrs |
+| Git Project Workflow | H | 3hrs | 2.5hrs | 3hrs |
+| Wireframing| H | 5hrs | 5hrs | 5hrs |
+| CSS| H | ∞hrs | 5hrs | 12hrs |
+| Project Management| H | 2hrs | 2hrs | 3hrs |
+| Deployment| H | 4hrs | 2hrs | 8hrs |
+| Total | H | 68hrs| 52.5hrs | 86hrs |
+
+
+## Helper Functions
+Helper functions should be generic enought that they can be reused in other applications. Use this section to document all helper functions that fall into this category.
+
+| Function | Description | 
+| --- | --- |  
+| compondentDidMount | Pulling data when page renders | 
+| handleClick | Changes state when called with an onclick|
+| handleInputChange | Changes state when user is typing in an input field| 
+| handleFormSubmit | uses axios post to submit form information to database | 
+
+## Additional Libraries
+ Use this section to list all supporting libraries and thier role in the project. 
+
+[TBD Messenger Library](). If we decide to do a messenger feature
+[Rea
+ 
+
+## Code Snippet
+
+Use this section to include a brief code snippet of functionality that you are proud of an a brief description  
+
+```
+  
+```
+
+## Change Log
+ Use this section to document what changes were made and the reasoning behind those changes.  
+ 
+ 
+
+## Issues and Resolutions
+ Use this section to list of all major issues encountered and their resolution.
+
+
+
+#### SAMPLE.....
+**ERROR**: app.js:34 Uncaught SyntaxError: Unexpected identifier                                
+**RESOLUTION**: Missing comma after first object in sources {} object
