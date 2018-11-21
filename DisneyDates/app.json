@@ -22,6 +22,9 @@
     ],
     "ios": {
       "supportsTablet": true
-    }
+    },
+    "facebookScheme": "fb450163875513165",
+    "facebookAppId": "450163875513165",
+    "facebookDisplayName": "Disney Dates"
   }
 }
