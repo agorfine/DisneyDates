@@ -39,11 +39,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 50,
     fontFamily: 'disneyFont',
-    fontSize: 75,
+    fontSize: 72,
     height: 100,
-    width: 350,
-    paddingTop: 10,
-    color: '#455AFF'
+    width: 360,
+    paddingTop: 20,
+    color: 'rgba(69, 90, 255, .7)',
+    textShadowColor: '#8E3AFF',
+    textShadowOffset: {width: 1, height: 1 },
+    textShadowRadius: 7
   },
   logo: {
     height: 300,

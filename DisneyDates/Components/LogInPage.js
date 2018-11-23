@@ -32,7 +32,8 @@ export default class LogInPage extends React.Component {
             if (type === 'success') {
                 // Get the user's name using Facebook's Graph API
                 const response = await fetch(`https://graph.facebook.com/me?access_token=${token}`);
-                Alert.alert('Logged in!', `Hi ${(await response.json()).name}!`);
+                // Alert.alert('Logged in!', `Hi ${(await response.json()).name}!`);
+                {this.props.navigation.navigate('SwipePage')}
             } else {
                 // type === 'cancel'
             }
@@ -44,19 +45,25 @@ export default class LogInPage extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-      	<View style={styles.imageContainer}>
-      		<Image style= {styles.heart} source= {require('../assets/heartIcon.png')}/>
-      		<Image style= {styles.heart} source= {require('../assets/heartIcon.png')}/>
-      		<Image style= {styles.heart} source= {require('../assets/heartIcon.png')}/>
-      		<Image style= {styles.heart} source= {require('../assets/heartIcon.png')}/>
-      		<Image style= {styles.heart} source= {require('../assets/heartIcon.png')}/>
-      		<Image style= {styles.heart} source= {require('../assets/heartIcon.png')}/>
-      		<Image style= {styles.heart} source= {require('../assets/heartIcon.png')}/>
-      	</View>
-      	{this.state.fontLoaded ? (<Text style={styles.text} h2>Disney Dates</Text>): null }
-        <Image style= {styles.logo} source= {require('../assets/disneyLogo512.png')}/>
-        <Button title  = 'CONTINUE WITH FACEBOOK'  style= {styles.button} buttonStyle= {styles.buttonStyle} textStyle = {styles.textStyle} onPress={this.logIn} />
-      </View>
+		      	<View style={styles.imageContainer}>
+		      		<Image style= {styles.heart} source= {require('../assets/heartIcon.png')}/>
+		      		<Image style= {styles.heart} source= {require('../assets/heartIcon.png')}/>
+		      		<Image style= {styles.heart} source= {require('../assets/heartIcon.png')}/>
+		      		<Image style= {styles.heart} source= {require('../assets/heartIcon.png')}/>
+		      		<Image style= {styles.heart} source= {require('../assets/heartIcon.png')}/>
+		      		<Image style= {styles.heart} source= {require('../assets/heartIcon.png')}/>
+		      		<Image style= {styles.heart} source= {require('../assets/heartIcon.png')}/>
+		      	</View>
+		      	{this.state.fontLoaded ? (<Text style={styles.text} h2>Disney Dates</Text>): null }
+		        <Image style= {styles.logo} source= {require('../assets/disneyLogo512.png')}/>
+		        <Button 
+		        	title  = 'CONTINUE WITH FACEBOOK'  
+		        	style= {styles.button} 
+		        	buttonStyle= {styles.buttonStyle} 
+		        	textStyle = {styles.textStyle} 
+		        	onPress={this.logIn} 
+		        />
+      		</View>
         );
     }
 }
@@ -81,7 +88,11 @@ const styles = StyleSheet.create({
         fontFamily: 'disneyFont',
         fontSize: 70,
         paddingTop: 15,
-    	color: '#455AFF'
+        height: 80,
+    	color: 'rgba(69, 90, 255, .7)',
+    	textShadowColor: '#8E3AFF',
+    	textShadowOffset: {width: 1, height: 1},
+    	textShadowRadius: 7
     },
     logo: {
         height: 200,
