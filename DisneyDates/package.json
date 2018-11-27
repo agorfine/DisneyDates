@@ -1,23 +1,26 @@
 {
-  "name": "empty-project-template",
-  "main": "node_modules/expo/AppEntry.js",
-  "private": true,
+  "name": "database",
+  "version": "1.0.0",
+  "description": "hi",
+  "main": "index.js",
   "scripts": {
-    "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
-    "eject": "expo eject"
+    "start": "node server.js",
+    "server": "node server.js",
+    "client": "cd client && npm start",
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
+    "debugger": "DEBUG=: nodemon server.js",
+    "heroku-postbuild": "npm install && cd client && npm install --only-dev && npm install && npm run build"
   },
+  "author": "",
+  "license": "ISC",
   "dependencies": {
-    "expo": "^31.0.2",
-    "react": "16.5.0",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-31.0.0.tar.gz",
-    "react-native-elements": "^0.19.1",
-    "react-native-gesture-handler": "^1.0.9",
-    "react-native-swipe-cards": "^0.1.1",
-    "react-navigation": "2.4.0"
-  },
-  "devDependencies": {
-    "babel-preset-expo": "^5.0.0"
+    "axios": "^0.18.0",
+    "body-parser": "^1.17.2",
+    "concurrently": "^4.1.0",
+    "cors": "^2.8.5",
+    "express": "^4.15.4",
+    "morgan": "^1.8.2",
+    "nodemon": "^1.18.5",
+    "pg-promise": "^6.3.8"
   }
 }
