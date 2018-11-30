@@ -17,7 +17,7 @@ const App = createSwitchNavigator (
       SettingsPage
     },
     {
-      initialRouteName: "LogInPage"
+      initialRouteName: "SettingsPage"
     }
   );
 

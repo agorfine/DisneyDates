@@ -1,10 +1,19 @@
 import React from 'react';
-import { ScrollView, StyleSheet, Text, View, TouchableWithoutFeedback, Image, TextInput } from 'react-native';
+import { ScrollView, StyleSheet, Text, View, TouchableWithoutFeedback, Image, TextInput, AsyncStorage } from 'react-native';
+import axios from 'axios';
 
 export default class EditProfile extends React.Component {
   state= {
       fontLoaded: false,
-      text: '',
+      fb_id: '',
+      age: '',
+      work: '',
+      education: '',
+      magicalMoment: '',
+      disneyCharacter: '',
+      disneyMovie: '',
+      disneyPark: '',
+      disneyAttraction: '',
   }
 
   async componentDidMount() {
@@ -14,12 +23,89 @@ export default class EditProfile extends React.Component {
       this.setState({
         fontLoaded: true
       })
+      const userID = await this._retrieveData()
+      console.log('THANKS KOZAK', userID)
+      
+      let getInfo = async () => {
+        let url=`http://173.2.3.208:3001/disneyDates/users/${userID}`
+        console.log(url)
+        
+        try {
+         let data = await axios.get(`http://192.168.0.4:3001/disneyDates/users/${userID}`)
+                    .then( res => {
+                      console.log(res.data)
+                      this.setState(prevState => ({
+                        fb_id: res.data.data.fb_id,
+                        age: res.data.data.age,
+                        work: res.data.data.work,
+                        education: res.data.data.education,
+                        magicalMoment: res.data.data.magical_moment,
+                        disneyCharacter: res.data.data.disney_character,
+                        disneyMovie: res.data.data.disney_movie,
+                        disneyPark: res.data.data.disney_park,
+                        disneyAttraction: res.data.data.disney_attraction
+                      }))
+                      console.log('THIS IS STATE: ', this.state)
+                    })
+                    .catch(err => {
+                      console.log(err)});
+        } catch (error) {
+              console.log('ERROR')
+        }
+      }
+
+      let info = await getInfo()
   };
+
+  _retrieveData = async () => {
+      try {
+        const value = await AsyncStorage.getItem('fb_id');
+        if (value !== null) {
+          // We have data!!
+          console.log(value);
+          return value
+        }
+       } catch (error) {
+         // Error retrieving data
+         console.log(error)
+       }
+  }
+
+  pushData = async () => {
+      const userID = await this._retrieveData()
+      console.log('THANKS KOZAK pt2', userID)
+      this.setState(prevState => 
+        ({ fb_id: userID 
+        }))
+
+      try {
+        let data = await await axios.put(`http://192.168.0.4:3001/disneyDates/users/${userID}`, {
+                              fb_id: this.state.fb_id,
+                              age: this.state.age,
+                              work: this.state.work,
+                              education: this.state.education,
+                              magical_moment: this.state.magicalMoment,
+                              disney_character: this.state.disneyCharacter,
+                              disney_movie: this.state.disneyMovie,
+                              disney_park: this.state.disneyPark,
+                              disney_attraction: this.state.disneyAttraction,
+                            })
+                             .then(res => {
+                              console.log(res.data);
+                            })
+                            .catch(err => console.log(err)
+                          )
+       } catch (error) {
+          console.log('ERROR with push')
+       }
+       {this.props.navigation.navigate('SwipePage')}
+    }
 
   render() {
   
     return (
       <View style={styles.container}>
+        
         <View style = {styles.containerTop}>
             <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('SettingsPage')}>
                 <Image
@@ -30,7 +116,7 @@ export default class EditProfile extends React.Component {
 
             {this.state.fontLoaded ? (<Text style={styles.text} h2>Disney Dates</Text>): null }
             
-            <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('SwipePage')}>
+            <TouchableWithoutFeedback onPress={this.pushData}>
                 <Image
                     style= {styles.saveButton} 
                     source= {require('../assets/save.png')}
@@ -38,6 +124,7 @@ export default class EditProfile extends React.Component {
             </TouchableWithoutFeedback>  
         </View>
         
+        <ScrollView>
         <View style={styles.containerSecond}>
             <View style= {styles.photosTop}>
                 <Image
@@ -70,21 +157,32 @@ export default class EditProfile extends React.Component {
         </View>
 
         <View style={styles.containerThird}>
-          <ScrollView>
-              <Text style= {styles.titleText1}>My work & education</Text>
+          
+              <Text style= {styles.titleText1}>Age</Text>
+              <TextInput
+                style = {styles.inputBox}
+                placeholder="Add age..."
+                placeholderTextColor="rgba(69,90,255, .6)"
+                maxLength = {100}
+                onChangeText={(age) => this.setState(prevState => ({ age }))}
+                value= {this.state.age}
+              />
+              <Text style= {styles.titleText}>My work & education</Text>
               <TextInput
                 style = {styles.inputBox}
                 placeholder="Add work..."
                 placeholderTextColor="rgba(69,90,255, .6)"
                 maxLength = {100}
-                onChangeText={(text) => this.setState({text})}
+                onChangeText={(work) => this.setState(prevState => ({ work }))}
+                value= {this.state.work}
               />
               <TextInput
                 style = {styles.inputBox}
-                placeholder="Add education..."
+                placeholder= 'Add education...'
                 placeholderTextColor="rgba(69,90,255, .6)"
                 maxLength = {100}
-                onChangeText={(text) => this.setState({text})}
+                onChangeText={(education) => this.setState(prevState => ({ education }))}
+                value= {this.state.education}
               />
               <Text style= {styles.titleText}>Most magical Disney moment</Text>
               <TextInput
@@ -92,7 +190,8 @@ export default class EditProfile extends React.Component {
                 placeholder="Add most magical Disney moment..."
                 placeholderTextColor="rgba(69,90,255, .6)"
                 maxLength = {200}
-                onChangeText={(text) => this.setState({text})}
+                onChangeText={(magicalMoment) => this.setState(prevState => ({ magicalMoment }))}
+                value= {this.state.magicalMoment}
               />
               <Text style= {styles.titleText}>Which Disney character describes you?</Text>
               <TextInput
@@ -100,7 +199,8 @@ export default class EditProfile extends React.Component {
                 placeholder="Add Disney character..."
                 placeholderTextColor="rgba(69,90,255, .6)"
                 maxLength = {100}
-                onChangeText={(text) => this.setState({text})}
+                onChangeText={(disneyCharacter) => this.setState(prevState => ({ disneyCharacter }))}
+                value= {this.state.disneyCharacter}
               />
               <Text style= {styles.titleText}>Favorite Disney Movie</Text>
               <TextInput
@@ -108,7 +208,8 @@ export default class EditProfile extends React.Component {
                 placeholder="Add favorite Disney movie..."
                 placeholderTextColor="rgba(69,90,255, .6)"
                 maxLength = {100}
-                onChangeText={(text) => this.setState({text})}
+                onChangeText={(disneyMovie) => this.setState(prevState => ({ disneyMovie }))}
+                value= {this.state.disneyMovie}
               />
               <Text style= {styles.titleText}>Favorite Disney park</Text>
               <TextInput
@@ -116,18 +217,21 @@ export default class EditProfile extends React.Component {
                 placeholder="Add favorite Disney park..."
                 placeholderTextColor="rgba(69,90,255, .6)"
                 maxLength = {100}
-                onChangeText={(text) => this.setState({text})}
+                onChangeText={(disneyPark) => this.setState(prevState => ({ disneyPark}))}
+                value= {this.state.disneyPark}
               />
               <Text style= {styles.titleText}>Favorite Disney attraction</Text>
               <TextInput
-                style = {styles.inputBox}
+                style = {styles.inputBox1}
                 placeholder="Add favorite Disney attraction..."
                 placeholderTextColor="rgba(69,90,255, .6)"
                 maxLength = {100}
-                onChangeText={(text) => this.setState({text})}
+                onChangeText={(disneyAttraction) => this.setState(prevState => ({ disneyAttraction }))}
+                value= {this.state.disneyAttraction}
               />
-          </ScrollView>
+        
         </View>
+        </ScrollView>
       </View>
     );
   }
@@ -236,6 +340,17 @@ const styles = StyleSheet.create({
     marginRight: 20,
     marginTop: 3,
     marginBottom: 5,
+    padding: 10,
+    borderRadius: 4,
+    borderWidth: 1,
+    borderColor: '#9013FE',
+    color: 'rgb(69,90,255)'
+  },
+  inputBox1: {
+    marginLeft: 20,
+    marginRight: 20,
+    marginTop: 3,
+    marginBottom: 35,
     padding: 10,
     borderRadius: 4,
     borderWidth: 1,

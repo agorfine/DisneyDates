@@ -51,14 +51,14 @@ DisneyDates.findAllMatches = () => {
 };
 
 // find specific user profile INFO for display
-DisneyDates.findUserProfile = id => {
+DisneyDates.findUserProfile = fb_id => {
   return db.oneOrNone(
     `
-    SELECT id, firstname, age, work, education, magical_moment, disney_character, disney_movie, disney_park, disney_attraction
+    SELECT fb_id, firstname, age, work, education, magical_moment, disney_character, disney_movie, disney_park, disney_attraction
     FROM users
-    WHERE id = $1
+    WHERE fb_id = $1
   `,
-    [id]
+    [fb_id]
   );
 };
 
@@ -139,30 +139,52 @@ DisneyDates.createPic = picture => {
 //   );
 // };
 
-// update user information
-DisneyDates.update = (user, id) => {
+// update user information from edit page
+DisneyDates.update = (user, fb_id) => {
   return db.one(
     `
     UPDATE users SET
-      firstname = $1,
-      lastname = $2,
-      email = $3,
-      age = $4,
-      gender = $5,
-      interested_gender = $6,
-      work = $7,
-      education = $8,
-      magical_moment = $9,
-      disney_character = $10,
-      disney_movie = $11,
-      disney_park = $12,
-      disney_attraction = $13
-    WHERE id = ${id}
+      fb_id = $1,
+      age = $2,
+      work = $3,
+      education = $4,
+      magical_moment = $5,
+      disney_character = $6,
+      disney_movie = $7,
+      disney_park = $8,
+      disney_attraction = $9
+    WHERE fb_id = $1
     RETURNING *
   `,
-    [user.firstname, user.lastname, user.email, user.age, user.gender, user.interested_gender, user.work, user.education, user.magical_moment, user.disney_character, user.disney_movie, user.disney_park, user.disney_attraction]
+    [user.fb_id, user.age, user.work, user.education, user.magical_moment, user.disney_character, user.disney_movie, user.disney_park, user.disney_attraction]
   );
 };
+
+// update user information from settings page
+// DisneyDates.update = (user, id) => {
+//   return db.one(
+//     `
+//     UPDATE users SET
+//       fb_id = $1,
+//       firstname = $2,
+//       lastname = $3,
+//       email = $4,
+//       age = $5,
+//       gender = $6,
+//       interested_gender = $7,
+//       work = $8,
+//       education = $9,
+//       magical_moment = $10,
+//       disney_character = $11,
+//       disney_movie = $12,
+//       disney_park = $13,
+//       disney_attraction = $14
+//     WHERE id = $1
+//     RETURNING *
+//   `,
+//     [user.fb_id, user.firstname, user.lastname, user.email, user.age, user.gender, user.interested_gender, user.work, user.education, user.magical_moment, user.disney_character, user.disney_movie, user.disney_park, user.disney_attraction]
+//   );
+// };
 
 // delete picture
 DisneyDates.destroy = id => {

@@ -9,6 +9,11 @@ import axios from 'axios';
 export default class LogInPage extends React.Component {
 	state= {
 	    fontLoaded: false,
+      firstName: '',
+      lastName: '',
+      gender: '',
+      id: '',
+      email: '',
 	}
 
 	async componentDidMount() {
@@ -42,55 +47,95 @@ export default class LogInPage extends React.Component {
                 permissions,
                 declinedPermissions,
             } = await Expo.Facebook.logInWithReadPermissionsAsync("450163875513165", {
-                permissions: ['public_profile', 'user_gender', 'user_age_range', 'user_photos'],
+                permissions: ['public_profile', 'email'],
             });
             
             if (type === 'success') {
-                const response = await fetch(`https://graph.facebook.com/me?access_token=${token}`);
-                console.log(response)
+                let response = await fetch(`https://graph.facebook.com/me?access_token=${token}`);
+                let credential = await firebase.auth.FacebookAuthProvider.credential(token);
+                let currentUser = await auth.signInAndRetrieveDataWithCredential(credential) 
 
-                const credential = await firebase.auth.FacebookAuthProvider.credential(token);
-                let currentUser = await auth.signInAndRetrieveDataWithCredential(credential)  
-                
-                let displayName = await currentUser.user.displayName
+                // console.log(Object.keys(currentUser))
 
-                let data = await console.log('THIS IS USER NAME', currentUser.user.displayName)
+                // console.log('THIS IS USER KEY ', currentUser.user)
+                // console.log('THIS IS credential KEY ', currentUser.credential)
+                console.log('THIS IS additionaluserinfo KEY ', currentUser.additionalUserInfo)
+                // console.log('THIS IS TOKEN ', token)
+                // console.log('THIS IS operationtype KEY ', currentUser.operationType)
 
-                userDb = async (currentUser) => {
-                   let result = await console.log(axios.post('http://173.2.3.208:3001/disneyDates/createUser', {
-                    fb_id: displayName,
-                    firstname: '',
-                    lastname: '',
-                    email: '',
-                    age: '',
-                    gender: '',
-                    interested_gender: '',
-                    work: '',
-                    education: '',
-                    magical_moment: '',
-                    disney_character: '',
-                    disney_movie: '',
-                    disney_park: '',
-                    disney_attraction: ''
+
+                let firstName = await currentUser.additionalUserInfo.profile.first_name
+                let lastName = await currentUser.additionalUserInfo.profile.last_name
+                let gender = await currentUser.additionalUserInfo.profile.gender
+                let id = await currentUser.additionalUserInfo.profile.id
+                let email = await currentUser.additionalUserInfo.profile.email
+                let newUser = await currentUser.additionalUserInfo.isNewUser
+
+                this.setState(prevState => ({
+                  firstName: firstName,
+                  lastName: lastName,
+                  gender: gender,
+                  id: id,
+                  email: email
                 }))
 
-                console.log(result)
-                     
+                let checkfirstname = await console.log('firstname ', firstName)
+                let checklastname = await console.log('lastname ', lastName)
+                let checkgender = await console.log('gender ', gender)
+                let checknewUser = await console.log('new user: ', newUser)
+
+                let userDB = async (id, firstName, lastName, gender, email) => {
+                  try {
+                   let data = await axios.post('http://192.168.0.4:3001/disneyDates/createUser', {
+                              fb_id: this.state.id,
+                              firstname: this.state.firstName,
+                              lastname: this.state.lastName,
+                              email: this.state.email,
+                              age: '',
+                              gender: this.state.gender,
+                              interested_gender: '',
+                              work: '',
+                              education: '',
+                              magical_moment: '',
+                              disney_character: '',
+                              disney_movie: '',
+                              disney_park: '',
+                              disney_attraction: '',
+                            })
+                             .then(res => {
+                              console.log(res.data);
+                            })
+                            .catch(err => console.log(err)
+                          )
+                  } catch (error) {
+                    
+                  }
                 }
-               
-               // userDb(currentUser)
                 
-               //  storeUser = async () => {
-               //      try {
-               //          await AsyncStorage.setItem('username', currentUser);
-               //      } catch (error) {
+                
+                let storeUser = async () => {
+                  try {
+                      await AsyncStorage.setItem('fb_id', this.state.id);
+                  } catch (error) {
 
-               //      }
-               //  }   
+                  }
+                }   
 
+              let store = await storeUser()
+              
+             postData = async () => {
+                  try {
+                      if(newUser === true) {
+                        let newPerson = await userDB(id, firstName, lastName, gender, email)
+                        {this.props.navigation.navigate('EditProfile')}
+                     } else {
+                        {this.props.navigation.navigate('SwipePage')}
+                     }
+                  } catch (error) {
 
-               
-                {this.props.navigation.navigate('EditProfile')}
+                  }
+                }   
+            let postIt = await postData()    
             
             } else {
                 // type === 'cancel'

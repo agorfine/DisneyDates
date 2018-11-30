@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableWithoutFeedback, AsyncStorage, Alert } from 'react-native';
 import SwipeCard from './SwipeCard'
 import EditProfile from './EditProfile'
 import Mouseages from './Mouseages'
@@ -16,11 +16,24 @@ export default class SwipePage extends React.Component {
       this.setState({
         fontLoaded: true
       })
-      fetch('http://173.2.3.208:3001/disneyDates/users')
-      .then(response => response.json())
-      .then(data => console.log(data))
+      // fetch('http://173.2.3.208:3001/disneyDates/users')
+      // .then(response => response.json())
+      // .then(data => console.log(data))
+      // this._retrieveData()
   }
 
+   // _retrieveData = async () => {
+   //    try {
+   //      const value = await AsyncStorage.removeItem('fb_id');
+   //      if (value !== null) {
+   //        // We have data!!
+   //        console.log('THIS IS WHAT IS IN AsyncStorage ', value);
+   //      }
+   //     } catch (error) {
+   //       // Error retrieving data
+   //       console.log(error)
+   //    }
+   //  }
 
   render() {
     

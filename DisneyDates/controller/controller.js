@@ -197,12 +197,8 @@ disneyController.createPic = (req, res) => {
 disneyController.update = (req, res) => {
   DisneyDates.update(
     {
-      firstname: req.body.firstname,
-      lastname: req.body.lastname,
-      email: req.body.email,
+      fb_id: req.body.fb_id,
       age: req.body.age,
-      gender: req.body.gender,
-      interested_gender: req.body.interested_gender,
       work: req.body.work,
       education: req.body.education,
       magical_moment: req.body.magical_moment,

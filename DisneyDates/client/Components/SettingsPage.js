@@ -1,17 +1,44 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableWithoutFeedback, Image, Button } from 'react-native';
+import { StyleSheet, Text, View, TouchableWithoutFeedback, Image, Button, AsyncStorage } from 'react-native';
 import { Slider } from 'react-native-elements'
+import * as firebase from 'firebase';
 
 export default class SettingsPage extends React.Component {
   state = {
     ageValue: 25,
     distanceValue: 20,
-    isGender: false,
-    isInterestedGender: false,
+    isPrince: false,
+    isPrincess: false,
+    isMagical: false,
+    isInterestedPrince: false,
+    isInterestedPrincess: false,
+    isInterestedMagical: false,
+    prince: 'male',
+    princess: 'female',
+    magical: 'magical'
+
   }
 
-  handleClick(e) {
-    e.stopPropagation()
+  _removeData = async () => {
+      try {
+        const value = await AsyncStorage.removeItem('fb_id');
+        if (value !== null) {
+          // We have data!!
+          console.log('THIS IS WHAT IS IN AsyncStorage ', value);
+        }
+       } catch (error) {
+         // Error retrieving data
+         console.log(error)
+      }
+  }
+
+  backToLogIn = async () => {
+    try {
+      {this._removeData}
+      {this.props.navigation.navigate('LogInPage')}
+    } catch(error) {
+
+    }
   }
 
   render() {
@@ -41,29 +68,169 @@ export default class SettingsPage extends React.Component {
         
         <View style={styles.containerBottom1}>
             <Text style={styles.containerBottomTitle}> I am a...</Text>
-                <Button
-                  title  = 'Princess'  
-                  style= {styles.button} 
-                  buttonStyle= {styles.buttonStyle} 
-                  textStyle = {styles.textStyle} 
-                  onPress={this.logIn} 
-                />
-                <Button
-                  title  = 'Prince'  
-                  style= {styles.button} 
-                  buttonStyle= {styles.buttonStyle} 
-                  textStyle = {styles.textStyle} 
-                  onPress={this.logIn} 
-                />
-                <Button
-                  title  = 'Other'  
-                  style= {styles.button} 
-                  buttonStyle= {styles.buttonStyle} 
-                  textStyle = {styles.textStyle} 
-                  onPress={this.logIn} 
-                />
+                <View style={styles.genderButtonContainer}>
+                    <TouchableWithoutFeedback 
+                      onPress={() => this.setState(prevState => ({
+                        isPrince: !this.state.isPrince,
+                        isPrincess: false,
+                        isMagical: false 
+                      }))}
+                    >
+                      <Text style={{
+                          textAlign: 'center',
+                          borderWidth: 1,
+                          width: 100,
+                          height: 32,
+                          borderColor: '#9013FE',
+                          borderRadius: 15,
+                          color: this.state.isPrince ? 'white' : 'rgba(69,90,255, .7)',
+                          paddingTop: 5,
+                          paddingBottom: 5,
+                          paddingRight: 10,
+                          paddingLeft: 10,
+                          fontSize: 17,
+                          marginLeft: 20,
+                          overflow: 'hidden',
+                          backgroundColor: this.state.isPrince ? '#9013FE' : 'white',
+                        }}>Prince</Text>
+                    </TouchableWithoutFeedback> 
+                    <TouchableWithoutFeedback
+                      onPress={() => this.setState(prevState => ({
+                        isPrince: false,
+                        isPrincess: !this.state.isPrincess,
+                        isMagical: false 
+                      }))}
+                    >
+                      <Text style={{
+                        textAlign: 'center',
+                        borderWidth:1,
+                        borderColor: '#9013FE',
+                        borderRadius: 15,
+                        overflow: 'hidden',
+                        color: this.state.isPrincess ? 'white' : 'rgba(69,90,255, .7)',
+                        paddingTop: 5,
+                        paddingBottom: 5,
+                        paddingRight: 10,
+                        paddingLeft: 10,
+                        width: 100,
+                        height: 32,
+                        fontSize: 17,
+                        backgroundColor: this.state.isPrincess ? '#9013FE' : 'white',
+                      }}>Princess</Text>
+                    </TouchableWithoutFeedback>
+                    <TouchableWithoutFeedback onPress={() => this.setState(prevState => ({
+                        isPrince: false,
+                        isPrincess: false,
+                        isMagical: !this.state.isMagical 
+                      }))}
+                    >
+                      <Text style={{
+                          textAlign: 'center',
+                          borderWidth:1,
+                          borderColor: '#9013FE',
+                          borderRadius: 15,
+                          color: this.state.isMagical ? 'white' : 'rgba(69,90,255, .7)',
+                          paddingTop: 5,
+                          paddingBottom: 5,
+                          paddingRight: 10,
+                          paddingLeft: 10,
+                          marginRight: 20,
+                          width: 100,
+                          height: 32,
+                          fontSize: 17,
+                          overflow: 'hidden',
+                          backgroundColor: this.state.isMagical ? '#9013FE' : 'white',
+                      }}>Magical</Text>
+                    </TouchableWithoutFeedback>
+                </View>
             <Text style={styles.containerBottomTitle}> I am interested in...</Text>
-            <Text style={styles.containerBottomTitle}> Maximum Age</Text>
+                <TouchableWithoutFeedback onPress={() => this.setState(prevState => ({
+                        isInterestedPrince: !this.state.isInterestedPrince,
+                        isInterestedPrincess: false,
+                        isisInterestedMagical: false
+                        }))}
+                >
+                  <Text 
+                    style={{
+                      textAlign: 'center',
+                      width: 330,
+                      height: 38,
+                      marginRight: 22.5,
+                      marginBottom: 5,
+                      marginLeft: 22.5,
+                      paddingTop: 8,
+                      paddingBottom: 5,
+                      paddingRight: 10,
+                      paddingLeft: 10,
+                      marginTop: 10,
+                      borderWidth:1,
+                      borderColor: '#9013FE',
+                      borderRadius: 15,
+                      fontSize: 17,
+                      overflow: 'hidden',
+                      color: this.state.isInterestedPrince ? 'white' : 'rgba(69,90,255, .7)',
+                      backgroundColor: this.state.isInterestedPrince ? '#9013FE' : 'white'
+                    }}>
+                    Prince</Text>
+                </TouchableWithoutFeedback>
+                <TouchableWithoutFeedback onPress={() => this.setState(prevState => ({
+                        isInterestedPrince: false,
+                        isInterestedPrincess: !this.state.isInterestedPrincess,
+                        isisInterestedMagical: false
+                        }))}
+                >
+                  <Text style={{
+                    textAlign: 'center',
+                    width: 330,
+                    height: 38,
+                    marginRight: 22.5,
+                    marginBottom: 5,
+                    marginLeft: 22.5,
+                    paddingTop: 8,
+                    paddingBottom: 5,
+                    paddingRight: 10,
+                    paddingLeft: 10,
+                    marginTop: 10,
+                    borderWidth:1,
+                    borderColor: '#9013FE',
+                    borderRadius: 15,
+                    fontSize: 17,
+                    overflow: 'hidden',
+                    color: this.state.isInterestedPrincess ? 'white' : 'rgba(69,90,255, .7)',
+                    backgroundColor: this.state.isInterestedPrincess ? '#9013FE' : 'white'
+                  }}>
+                  Princess</Text>
+                </TouchableWithoutFeedback>
+                <TouchableWithoutFeedback onPress={() => this.setState(prevState => ({
+                        isInterestedPrince: false,
+                        isInterestedPrincess: false,
+                        isisInterestedMagical: !this.state.isInterestedMagical
+                        }))}
+                >
+                  <Text style={{
+                    textAlign: 'center',
+                    width: 330,
+                    height: 38,
+                    marginRight: 22.5,
+                    marginBottom: 5,
+                    marginLeft: 22.5,
+                    paddingTop: 8,
+                    paddingBottom: 5,
+                    paddingRight: 10,
+                    paddingLeft: 10,
+                    marginTop: 10,
+                    borderWidth:1,
+                    borderColor: '#9013FE',
+                    borderRadius: 15,
+                    fontSize: 17,
+                    overflow: 'hidden',
+                    color: this.state.isInterestedMagical? 'white' : 'rgba(69,90,255, .7)',
+                    backgroundColor: this.state.isInterestedMagical ? '#9013FE' : 'white'
+                  }}>
+                  Everyone</Text>
+                </TouchableWithoutFeedback>
+            
+            <Text style={styles.containerBottomTitle1}> Maximum Age</Text>
             
             <View style={styles.sliderBox1}>
               <Text style={styles.sliderText}>Between {Math.floor(this.state.ageValue)}</Text>
@@ -98,8 +265,9 @@ export default class SettingsPage extends React.Component {
                 maximumValue = {30}
               />
             </View>
-
-            <Text style={styles.logOutButton}>LOG OUT</Text>
+            <TouchableWithoutFeedback onPress={this.backToLogIn}>
+              <Text style={styles.logOutButton}>LOG OUT</Text>
+            </TouchableWithoutFeedback>
         </View>
       </View>
     );
@@ -151,43 +319,74 @@ const styles = StyleSheet.create({
     flex: 3
   },
   containerBottomTitle: {
-    color: 'rgba(69,90,255, .5)',
+    color: 'rgba(69,90,255, .7)',
     fontWeight: 'bold',
-    fontSize: 17,
+    fontSize: 15,
     marginTop: 12,
-    marginLeft: 10,
+    marginLeft: 20,
   },
+  containerBottomTitle1: {
+    color: 'rgba(69,90,255, .7)',
+    fontWeight: 'bold',
+    fontSize: 15,
+    marginTop: 25,
+    marginLeft: 20,
+  },
+  genderButtonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 10,
+    marginBottom: 13
+  },
+  // otherGender: {
+  //   textAlign: 'center',
+  //   width: 330,
+  //   height: 38,
+  //   marginRight: 22.5,
+  //   marginBottom: 5,
+  //   marginLeft: 22.5,
+  //   paddingTop: 8,
+  //   paddingBottom: 5,
+  //   paddingRight: 10,
+  //   paddingLeft: 10,
+  //   marginTop: 10,
+  //   borderWidth:1,
+  //   borderColor: '#9013FE',
+  //   borderRadius: 15,
+  //   color: 'rgba(69,90,255, .7)',
+  //   fontSize: 17
+  // },
   sliderText:{
     marginTop: 12,
     marginLeft: 15,
     fontSize: 17,
-    color: 'rgba(69,90,255, .5)'
+    color: 'rgba(69,90,255, .7)'
   },
   sliderBox1: {
-    borderWidth: .5,
+    borderWidth:1,
     borderColor: '#9013FE',
-    width: 350,
+    width: 330,
     marginLeft: 'auto',
     marginTop: 10,
-    marginBottom: 25,
-    marginRight: 12.5,
-    marginLeft: 12.5,
+    marginBottom: 18,
+    marginRight: 22.5,
+    marginLeft: 22.5,
     // shadowColor: 'blue',
     // shadowOffset: {width: 1, height: 1},
     // shadowRadius: 7,
     // shadowOpacity: 1,
-    borderRadius: 10,
+    borderRadius: 6,
     paddingBottom: 5
   },
   sliderBox2: {
-    borderWidth: .5,
+    borderWidth:1,
     borderColor: '#9013FE',
-    width: 350,
-    marginRight: 12.5,
-    marginLeft: 12.5,
+    width: 330,
+    marginRight: 22.5,
+    marginLeft: 22.5,
     marginTop: 10,
-    marginBottom: 20,
-    borderRadius: 10,
+    marginBottom: 18,
+    borderRadius: 6,
     paddingBottom: 5
   },
   logOutButton: {
@@ -201,11 +400,11 @@ const styles = StyleSheet.create({
     color: '#455aff',
     fontSize: 20,
     borderRadius: 10,
-    borderWidth: 0.5,
+    borderWidth: 1,
     borderColor: '#9013FE',
+    marginTop: 20,
   },
 });
 
-
-
+       
 

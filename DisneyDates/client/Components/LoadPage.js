@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Dimensions, Image } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, Image, AsyncStorage } from 'react-native';
 
 export default class LoadPage extends React.Component {
   state= {
@@ -13,12 +13,35 @@ export default class LoadPage extends React.Component {
     this.setState({
       fontLoaded: true
     })
+    await this._retrieveData()
   }
+
+  _retrieveData = async () => {
+      try {
+        const value = await AsyncStorage.getItem('fb_id');
+        if (value !== null) {
+          // We have data!!
+          console.log(value);
+          setTimeout(() => {
+            this.props.navigation.navigate('SwipePage')
+            }, 2000);
+        } else {
+          console.log('storage empty')
+          setTimeout(() => {
+            this.props.navigation.navigate('LogInPage')
+            }, 2000);
+        }
+       } catch (error) {
+         // Error retrieving data
+         console.log(error)
+       }
+    }
 
   render() {
     setTimeout(() => {
       this.props.navigation.navigate('LogInPage')
     }, 2000);
+
     return (
       <View style={styles.container}>
           {this.state.fontLoaded ? (<Text style={styles.text} h2>Disney Dates</Text>): null }

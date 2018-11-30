@@ -3,7 +3,7 @@
 DROP TABLE IF EXISTS users;
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
-  fb_id INT NOT NULL,
+  fb_id VARCHAR(500) NOT NULL,
   firstname TEXT,
   lastname TEXT,
   email VARCHAR(50),
