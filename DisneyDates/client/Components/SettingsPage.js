@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, TouchableWithoutFeedback, Image, Button, AsyncStorage } from 'react-native';
 import { Slider } from 'react-native-elements'
 import * as firebase from 'firebase';
+import axios from 'axios';
 
 export default class SettingsPage extends React.Component {
   state = {
@@ -13,10 +14,120 @@ export default class SettingsPage extends React.Component {
     isInterestedPrince: false,
     isInterestedPrincess: false,
     isInterestedMagical: false,
-    prince: 'male',
-    princess: 'female',
-    magical: 'magical'
+    gender: '',
+    interested_gender: '',
+    fb_id: ''
 
+  }
+
+  async componentDidMount() {
+      const userID = await this._retrieveData()
+      console.log('User ID: ', userID)
+      
+      let getInfo = async () => {
+        let url=`http://192.168.0.4:3001/disneyDates/gender/${userID}`
+        console.log(url)
+        
+        try {
+         let data = await axios.get(url)
+                    .then( res => {
+                      console.log(res.data)
+                      this.setState(prevState => ({
+                        fb_id: res.data.data.fb_id,
+                        gender: res.data.data.gender,
+                        interested_gender: res.data.data.interested_gender,
+                      }))
+                      console.log('THIS IS STATE: ', this.state)
+                    })
+                    .catch(err => {
+                      console.log(err)});
+        } catch (error) {
+              console.log('ERROR')
+        }
+      }
+
+      let info = await getInfo()
+
+      gender = async () => {
+        try {
+          if (this.state.gender === 'female'){
+            this.setState(prevState => ({
+              isPrincess: true,
+            }))
+          } else if (this.state.gender === 'male'){
+            this.setState(prevState => ({
+              isPrince: true,
+            }))
+          } else {
+            this.setState(prevState => ({
+              isMagical: true,
+            }))
+          }
+        } catch (error) {
+
+        }
+      }
+
+      interestedGender = async () => {
+        try {
+          if (this.state.interested_gender === 'female'){
+            this.setState(prevState => ({
+              isInterestedPrincess: true,
+            }))
+          } else if (this.state.interested_gender === 'male'){
+            this.setState(prevState => ({
+              isInterestedPrince: true,
+            }))
+          } else {
+            this.setState(prevState => ({
+              isInterestedMagical: true,
+            }))
+          }
+        } catch (error) {
+
+        }
+      }
+
+      let genderSet = await gender()
+      let interestedGenderSet = await interestedGender()
+  };
+
+  pushData = async () => {
+    const userID = await this._retrieveData()
+      console.log('THANKS KOZAK pt2', userID)
+      this.setState(prevState => 
+        ({ fb_id: userID 
+        }))
+      
+    try {
+      let data = await axios.put(`http://192.168.0.4:3001/disneyDates/usersGender/${userID}`, {
+                            fb_id: this.state.fb_id,
+                            gender: this.state.gender,
+                            interested_gender: this.state.interested_gender
+                          })
+                           .then(res => {
+                            console.log(res.data);
+                          })
+                          .catch(err => console.log(err)
+                        )
+     } catch (error) {
+        console.log('ERROR with push')
+     }
+     {this.props.navigation.navigate('EditProfile')}
+  }
+
+  _retrieveData = async () => {
+      try {
+        const value = await AsyncStorage.getItem('fb_id');
+        if (value !== null) {
+          // We have data!!
+          console.log(value);
+          return value
+        }
+       } catch (error) {
+         // Error retrieving data
+         console.log(error)
+       }
   }
 
   _removeData = async () => {
@@ -58,7 +169,7 @@ export default class SettingsPage extends React.Component {
                 />
                 <Text style={styles.text} h2>settings</Text>
             </View>  
-            <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('EditProfile')}>
+            <TouchableWithoutFeedback onPress={this.pushData}>
                 <Image
                     style= {styles.searchButton} 
                     source= {require('../assets/rightarrow.png')}
@@ -73,7 +184,8 @@ export default class SettingsPage extends React.Component {
                       onPress={() => this.setState(prevState => ({
                         isPrince: !this.state.isPrince,
                         isPrincess: false,
-                        isMagical: false 
+                        isMagical: false, 
+                        gender: 'male'
                       }))}
                     >
                       <Text style={{
@@ -98,7 +210,8 @@ export default class SettingsPage extends React.Component {
                       onPress={() => this.setState(prevState => ({
                         isPrince: false,
                         isPrincess: !this.state.isPrincess,
-                        isMagical: false 
+                        isMagical: false,
+                        gender: 'female' 
                       }))}
                     >
                       <Text style={{
@@ -121,7 +234,8 @@ export default class SettingsPage extends React.Component {
                     <TouchableWithoutFeedback onPress={() => this.setState(prevState => ({
                         isPrince: false,
                         isPrincess: false,
-                        isMagical: !this.state.isMagical 
+                        isMagical: !this.state.isMagical,
+                        gender: ''
                       }))}
                     >
                       <Text style={{
@@ -140,14 +254,15 @@ export default class SettingsPage extends React.Component {
                           fontSize: 17,
                           overflow: 'hidden',
                           backgroundColor: this.state.isMagical ? '#9013FE' : 'white',
-                      }}>Magical</Text>
+                      }}>Princex</Text>
                     </TouchableWithoutFeedback>
                 </View>
             <Text style={styles.containerBottomTitle}> I am interested in...</Text>
                 <TouchableWithoutFeedback onPress={() => this.setState(prevState => ({
                         isInterestedPrince: !this.state.isInterestedPrince,
                         isInterestedPrincess: false,
-                        isisInterestedMagical: false
+                        isInterestedMagical: false,
+                        interested_gender: 'male'
                         }))}
                 >
                   <Text 
@@ -176,7 +291,8 @@ export default class SettingsPage extends React.Component {
                 <TouchableWithoutFeedback onPress={() => this.setState(prevState => ({
                         isInterestedPrince: false,
                         isInterestedPrincess: !this.state.isInterestedPrincess,
-                        isisInterestedMagical: false
+                        isInterestedMagical: false,
+                        interested_gender: 'female'
                         }))}
                 >
                   <Text style={{
@@ -204,7 +320,8 @@ export default class SettingsPage extends React.Component {
                 <TouchableWithoutFeedback onPress={() => this.setState(prevState => ({
                         isInterestedPrince: false,
                         isInterestedPrincess: false,
-                        isisInterestedMagical: !this.state.isInterestedMagical
+                        isInterestedMagical: !this.state.isInterestedMagical,
+                        interested_gender: ''
                         }))}
                 >
                   <Text style={{
@@ -338,24 +455,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 13
   },
-  // otherGender: {
-  //   textAlign: 'center',
-  //   width: 330,
-  //   height: 38,
-  //   marginRight: 22.5,
-  //   marginBottom: 5,
-  //   marginLeft: 22.5,
-  //   paddingTop: 8,
-  //   paddingBottom: 5,
-  //   paddingRight: 10,
-  //   paddingLeft: 10,
-  //   marginTop: 10,
-  //   borderWidth:1,
-  //   borderColor: '#9013FE',
-  //   borderRadius: 15,
-  //   color: 'rgba(69,90,255, .7)',
-  //   fontSize: 17
-  // },
   sliderText:{
     marginTop: 12,
     marginLeft: 15,

@@ -27,7 +27,7 @@ export default class EditProfile extends React.Component {
       console.log('THANKS KOZAK', userID)
       
       let getInfo = async () => {
-        let url=`http://173.2.3.208:3001/disneyDates/users/${userID}`
+        let url=`http://192.168.0.4:3001/disneyDates/users/${userID}`
         console.log(url)
         
         try {
@@ -79,7 +79,7 @@ export default class EditProfile extends React.Component {
         }))
 
       try {
-        let data = await await axios.put(`http://192.168.0.4:3001/disneyDates/users/${userID}`, {
+        let data = await axios.put(`http://192.168.0.4:3001/disneyDates/users/${userID}`, {
                               fb_id: this.state.fb_id,
                               age: this.state.age,
                               work: this.state.work,

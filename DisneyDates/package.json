@@ -21,6 +21,7 @@
     "express": "^4.15.4",
     "morgan": "^1.8.2",
     "nodemon": "^1.18.5",
-    "pg-promise": "^6.3.8"
+    "pg-promise": "^6.3.8",
+    "pusher-js": "^4.3.1"
   }
 }

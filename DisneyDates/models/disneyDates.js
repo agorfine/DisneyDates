@@ -62,6 +62,18 @@ DisneyDates.findUserProfile = fb_id => {
   );
 };
 
+// find user gender info
+DisneyDates.findUserGender = fb_id => {
+  return db.oneOrNone(
+    `
+    SELECT fb_id, gender, interested_gender
+    FROM users
+    WHERE fb_id = $1
+  `,
+    [fb_id]
+  );
+};
+
 
 // find specific user profile IMAGES info for display
 DisneyDates.findUserPics = id => {
@@ -157,6 +169,21 @@ DisneyDates.update = (user, fb_id) => {
     RETURNING *
   `,
     [user.fb_id, user.age, user.work, user.education, user.magical_moment, user.disney_character, user.disney_movie, user.disney_park, user.disney_attraction]
+  );
+};
+
+// update user information from settings page
+DisneyDates.updateGender = (user, fb_id) => {
+  return db.one(
+    `
+    UPDATE users SET
+      fb_id = $1,
+      gender = $2,
+      interested_gender = $3
+    WHERE fb_id = $1
+    RETURNING *
+  `,
+    [user.fb_id, user.gender, user.interested_gender]
   );
 };
 

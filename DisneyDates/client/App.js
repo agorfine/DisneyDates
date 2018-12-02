@@ -17,7 +17,7 @@ const App = createSwitchNavigator (
       SettingsPage
     },
     {
-      initialRouteName: "SettingsPage"
+      initialRouteName: "Mouseages"
     }
   );
 

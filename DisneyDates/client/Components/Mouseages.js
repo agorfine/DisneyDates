@@ -1,7 +1,26 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableWithoutFeedback, Image } from 'react-native';
+import { StyleSheet, Text, View, TouchableWithoutFeedback, Image, ScrollView } from 'react-native';
+import Pusher from 'pusher-js/react-native';
 
 export default class Mouseages extends React.Component {
+
+  async componentDidMount() {
+    try {
+      Pusher.logToConsole = true;
+
+    var pusher = new Pusher('5ee03199f6126739042f', {
+      cluster: 'us2',
+      forceTLS: true
+    });
+
+    var channel = pusher.subscribe('my-channel');
+    channel.bind('my-event', function(data) {
+      alert(data.message);
+    });
+    } catch(error){
+
+    }
+  }
 
   render() {
   
@@ -30,6 +49,41 @@ export default class Mouseages extends React.Component {
         </View>
         <View style={styles.containerBottom}>
             <Text style={styles.containerBottomTitle}> Become Part of Their World . . . </Text>
+            <ScrollView horizontal={true} style={styles.newChatContainer}>
+              <Image
+                    style= {styles.newChat} 
+                    source= {require('../assets/man7.jpg')}
+              />
+              <Image
+                    style= {styles.newChat} 
+                    source= {require('../assets/man8.jpg')}
+              />
+              <Image
+                    style= {styles.newChat} 
+                    source= {require('../assets/man2.jpg')}
+              />
+              <Image
+                    style= {styles.newChat} 
+                    source= {require('../assets/man4.jpg')}
+              />
+              <Image
+                    style= {styles.newChat} 
+                    source= {require('../assets/man3.jpg')}
+              />
+              <Image
+                    style= {styles.newChat} 
+                    source= {require('../assets/man5.jpg')}
+              />
+              <Image
+                    style= {styles.newChat} 
+                    source= {require('../assets/man1.jpg')}
+              />
+              <Image
+                    style= {styles.newChatLast} 
+                    source= {require('../assets/man6.jpg')}
+              />
+            </ScrollView>
+            <Text style={styles.containerBottomTitle}> Mouseages </Text>
         </View>
       </View>
     );
@@ -82,10 +136,31 @@ const styles = StyleSheet.create({
   },
   containerBottomTitle: {
     color: '#9013FE',
-    fontSize: 17,
-    marginTop: 12,
+    fontSize: 15,
+    marginTop: 15,
     marginLeft: 10,
-
+  },
+  newChatContainer: {
+    flexDirection: 'row',
+    marginTop: 15
+  },
+  newChat: {
+    borderWidth:1,
+    borderColor:'rgba(0,0,0,0)',
+    borderRadius: 80/2,
+    width: 80,
+    height: 80,
+    marginLeft: 10,
+    marginRight: 3
+  },
+  newChatLast: {
+    borderWidth:1,
+    borderColor:'rgba(0,0,0,0)',
+    borderRadius: 80/2,
+    width: 80,
+    height: 80,
+    marginLeft: 10,
+    marginRight: 10
   }
 });
 

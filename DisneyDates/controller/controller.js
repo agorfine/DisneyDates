@@ -45,6 +45,20 @@ disneyController.indexOfUserDisplayInfo = (req, res) => {
     });
 };
 
+disneyController.gender = (req, res) => {
+  DisneyDates.findUserGender(req.params.id)
+    .then(disneyDates => {
+      res.json({
+        message: 'user gender displayed',
+        data: disneyDates,
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({ err });
+    });
+};
+
 disneyController.indexOfPics = (req, res) => {
   DisneyDates.findAllPic()
     .then(disneyDates => {
@@ -212,6 +226,27 @@ disneyController.update = (req, res) => {
     .then(disneyDates => {
       res.json({
         message: 'user profile updated',
+        data: disneyDates,
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({ err });
+    });
+};
+
+disneyController.updateGender = (req, res) => {
+  DisneyDates.updateGender(
+    {
+      fb_id: req.body.fb_id,
+      gender: req.body.gender,
+      interested_gender: req.body.interested_gender
+    },
+    req.params.id,
+  )
+    .then(disneyDates => {
+      res.json({
+        message: 'user genders updated',
         data: disneyDates,
       });
     })
