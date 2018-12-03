@@ -1,5 +1,6 @@
 import React from 'react';
 import { ScrollView, StyleSheet, Text, View, TouchableWithoutFeedback, Image, TextInput, AsyncStorage } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import axios from 'axios';
 
 export default class EditProfile extends React.Component {
@@ -125,6 +126,7 @@ export default class EditProfile extends React.Component {
         </View>
         
         <ScrollView>
+        <KeyboardAwareScrollView>
         <View style={styles.containerSecond}>
             <View style= {styles.photosTop}>
                 <Image
@@ -155,7 +157,7 @@ export default class EditProfile extends React.Component {
                 />
             </View>
         </View>
-
+      
         <View style={styles.containerThird}>
           
               <Text style= {styles.titleText1}>Age</Text>
@@ -229,8 +231,8 @@ export default class EditProfile extends React.Component {
                 onChangeText={(disneyAttraction) => this.setState(prevState => ({ disneyAttraction }))}
                 value= {this.state.disneyAttraction}
               />
-        
         </View>
+        </KeyboardAwareScrollView>
         </ScrollView>
       </View>
     );

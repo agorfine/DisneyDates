@@ -19,7 +19,7 @@ const App = createSwitchNavigator (
       Chat
     },
     {
-      initialRouteName: "Mouseages"
+      initialRouteName: "LoadPage"
     }
   );
 
