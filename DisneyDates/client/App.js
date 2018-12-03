@@ -6,6 +6,7 @@ import SwipePage from './Components/SwipePage'
 import Mouseages from './Components/Mouseages'
 import EditProfile from './Components/EditProfile'
 import SettingsPage from './Components/SettingsPage'
+import Chat from './Components/Chat'
 
 const App = createSwitchNavigator (
     {
@@ -14,7 +15,8 @@ const App = createSwitchNavigator (
       SwipePage,
       Mouseages,
       EditProfile,
-      SettingsPage
+      SettingsPage,
+      Chat
     },
     {
       initialRouteName: "Mouseages"

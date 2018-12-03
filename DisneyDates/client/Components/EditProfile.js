@@ -344,7 +344,8 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     borderWidth: 1,
     borderColor: '#9013FE',
-    color: 'rgb(69,90,255)'
+    color: 'rgb(69,90,255)',
+    // elevation: 1,
   },
   inputBox1: {
     marginLeft: 20,
